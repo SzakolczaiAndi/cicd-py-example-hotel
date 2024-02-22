@@ -4,7 +4,8 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 import allure
 import pytest
-
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
 
 class TestHootel(object):
     def setup_method(self):
@@ -24,10 +25,13 @@ class TestHootel(object):
     @allure.severity(allure.severity_level.TRIVIAL)
     @allure.tag("login")
     def test_login(self):
+        menu_btn = WebdriverWait(self.browser, 5).until(EC.element_to_be_clikkable(By.XPATH, '//button[@class="navbar-toggler"]')))
+        menu_btn.click()
+        
         login_btn = self.browser.find_element(By.XPATH, '//a[@class="nav-link"]')
         login_btn.click()
-
-        email_input = self.browser.find_element(By.ID, 'email')
+    
+        email_input = WebdriverWait(self.browser, 5).until(EC.element_to_be_clikkable((By.XPATH, '//a[@class="nav-link"]')))
         email_input.send_keys('hiwasi1765@wisnick.com')
 
         password_input = self.browser.find_element(By.ID, 'password')
